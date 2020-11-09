@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["src/components/*"],
+      "hooks": ["src/hooks"],
+      "models": ["src/models"],
+      "styles": ["src/styles"],
+      "testutils": ["src/testutils"],
+      "utils": ["src/utils"],
+      "views/*": ["src/views/*"],
+    },
+    "target": "esnext",
+    "module": "commonjs",
+    "lib": ["ESNext", "dom"],
+    "jsx": "react",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": [
+    "src/**/*"
+  ]
+}
