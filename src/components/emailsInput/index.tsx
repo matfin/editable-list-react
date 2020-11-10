@@ -1,57 +1,23 @@
-import React from 'react';
-import { EmailAddress } from 'models';
-import { BoxItem, Container, InputBox } from './emailsInput.css';
-import EmailBlock from 'components/emailBlock';
+import React, { useReducer } from 'react';
+import emailsInputActions from './actions';
+import emailsInputReducer, { defaultState } from './reducer';
+import { EmailsInput } from './emailsInput';
 
-const data: EmailAddress[] = [
-  {
-    id: '123',
-    email: 'matfin@gmail.com',
-  },
-  {
-    id: '456',
-    email: 'me@mattfinucane.com',
-  },
-  {
-    id: '789',
-    email: 'faeleah@gmail.com',
-  },
-  {
-    id: '1011',
-    email: 'matfin@hotmail.com',
-  },
-  {
-    id: '1213',
-    email: 'e@r.ru',
-  },
-];
-
-const EmailsInput = (): JSX.Element => {
-  const noop = (): void => {};
+const ContainerComponent = (): JSX.Element => {
+  const [state, dispatch] = useReducer(emailsInputReducer, defaultState);
+  const actions = emailsInputActions(dispatch);
+  const { emailAddresses, email } = state;
 
   return (
-    <Container>
-      {data.map(
-        (item: EmailAddress): JSX.Element => (
-          <BoxItem key={item.id}>
-            <EmailBlock
-              emailAddress={item}
-              onClickDelete={noop}
-            />
-          </BoxItem>
-        )
-      )}
-      <BoxItem>
-        <InputBox
-          onInputBlur={noop}
-          onInputChange={noop}
-          onInputFocus={noop}
-          placeholder="add more people..."
-          shouldFocus
-        />
-      </BoxItem>
-    </Container>
+    <EmailsInput
+      email={email}
+      emailAddresses={emailAddresses}
+      createEmailAddress={actions.createEmailAddress}
+      deleteEmailAddress={actions.deleteEmailAddress}
+      resetEmailAddress={actions.resetEmailAddress}
+      updateEmailAddress={actions.updateEmailAdress}
+    />
   );
 };
 
-export default EmailsInput;
+export default ContainerComponent;

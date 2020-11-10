@@ -5,7 +5,7 @@ export interface Props {
   className?: string;
   onInputBlur(e: React.FocusEvent<HTMLInputElement>): void;
   onInputChange(e: React.ChangeEvent<HTMLInputElement>): void;
-  onInputFocus(e: React.FocusEvent<HTMLInputElement>): void;
+  onInputFocus?(e: React.FocusEvent<HTMLInputElement>): void;
   placeholder?: string;
   shouldFocus?: boolean;
   value?: string;

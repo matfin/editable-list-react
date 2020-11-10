@@ -11,6 +11,7 @@ module.exports = (env, { mode }) => ({
   resolve: {
     alias: {
       'components': path.resolve(__dirname, 'src/components/'),
+      'hooks': path.resolve(__dirname, 'src/hooks/'),
       'models': path.resolve(__dirname, 'src/models/')
     },
     extensions: ['.ts', '.tsx', '.js']
