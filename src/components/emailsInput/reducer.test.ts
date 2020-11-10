@@ -9,6 +9,27 @@ describe('reducer', (): void => {
     email: 'test@test.nl',
   };
 
+  it('updates the state when creating a batch of email addresses', (): void => {
+    const state: EmailsInputState = reducer(
+      {
+        ...defaultState,
+        email: 'matfin@gmail.com, somewhere,,, invalid, another@email.yu,',
+      },
+      {
+        type: ActionTypes.BATCH_CREATE_EMAIL_ADDRESS,
+      }
+    );
+
+    const check: EmailsInputState = {
+      email: 'matfin@gmail.com, somewhere,,, invalid, another@email.yu,',
+      emailAddresses: [
+        { id: expect.any(String), email: 'matfin@gmail.com', isValid: true },
+        { id: expect.any(String), email: 'somewhere', isValid: false },
+        { id: expect.any(String), email: 'another@email.yu', isValid: true },
+      ]
+    }
+  });
+
   it('updates the state when creating an email address', (): void => {
     const state: EmailsInputState = reducer(
       {

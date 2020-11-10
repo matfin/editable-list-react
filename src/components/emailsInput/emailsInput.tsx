@@ -7,6 +7,7 @@ import EmailBlock from 'components/emailBlock';
 export interface Props {
   email: string;
   emailAddresses: EmailAddress[],
+  batchCreateEmailAddresses: () => void;
   createEmailAddress: () => void;
   deleteEmailAddress: (emailAddress: EmailAddress) => void;
   resetEmailAddress: () => void;
@@ -16,6 +17,7 @@ export interface Props {
 export const EmailsInput = ({
   email,
   emailAddresses,
+  batchCreateEmailAddresses,
   createEmailAddress,
   deleteEmailAddress,
   resetEmailAddress,
@@ -23,7 +25,16 @@ export const EmailsInput = ({
 }: Props): JSX.Element => {
   const onInputChange = ({
     target: { value },
-  }: React.ChangeEvent<HTMLInputElement>) => updateEmailAddress(value);
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    const splitValues: string[] = value.split(',');
+
+    updateEmailAddress(value);
+
+    if(splitValues.length > 1) {
+      batchCreateEmailAddresses();
+      resetEmailAddress();
+    }
+  };
 
   const saveEmailAddress = () => {
     if (email.length > 0) {
