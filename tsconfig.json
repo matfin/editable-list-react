@@ -3,12 +3,7 @@
     "baseUrl": "./",
     "paths": {
       "components/*": ["src/components/*"],
-      "hooks": ["src/hooks"],
       "models": ["src/models"],
-      "styles": ["src/styles"],
-      "testutils": ["src/testutils"],
-      "utils": ["src/utils"],
-      "views/*": ["src/views/*"],
     },
     "target": "esnext",
     "module": "commonjs",

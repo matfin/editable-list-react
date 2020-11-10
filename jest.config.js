@@ -15,6 +15,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '^components/(.*)$': '<rootDir>/src/components/$1',
+    '^models/(.*)$': '<rootDir>/src/models/$1',
   },
   coveragePathIgnorePatterns: [
     'node_modules',
