@@ -12,6 +12,7 @@ const ContainerComponent = (): JSX.Element => {
     <EmailsInput
       email={email}
       emailAddresses={emailAddresses}
+      batchCreateEmailAddresses={actions.batchCreateEmailAddresses}
       createEmailAddress={actions.createEmailAddress}
       deleteEmailAddress={actions.deleteEmailAddress}
       resetEmailAddress={actions.resetEmailAddress}

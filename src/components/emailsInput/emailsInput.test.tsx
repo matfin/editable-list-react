@@ -5,17 +5,20 @@ import { EmailsInput, Props } from './emailsInput';
 
 describe('EmailsInput tests', (): void => {
   const emailAddresses: EmailAddress[] = [
-    { id: '123', email: 'matt@test.one' },
-    { id: '456', email: 'matt@test.two' },
+    { id: '123', email: 'matt@test.one', isValid: true },
+    { id: '456', email: 'matt@test.two', isValid: true },
   ];
 
+  const spyBatchCreateEmailAddresses = jest.fn();
   const spyCreateEmailAddress = jest.fn();
   const spyDeleteEmailAddress = jest.fn();
   const spyResetEmailAddress = jest.fn();
   const spyUpdateEmailAddress = jest.fn();
+
   const defaultProps: Props = {
     email: '',
     emailAddresses: [],
+    batchCreateEmailAddresses: spyBatchCreateEmailAddresses,
     createEmailAddress: spyCreateEmailAddress,
     deleteEmailAddress: spyDeleteEmailAddress,
     resetEmailAddress: spyResetEmailAddress,
@@ -23,6 +26,7 @@ describe('EmailsInput tests', (): void => {
   };
 
   beforeEach((): void => {
+    spyBatchCreateEmailAddresses.mockClear();
     spyCreateEmailAddress.mockClear();
     spyDeleteEmailAddress.mockClear();
     spyResetEmailAddress.mockClear();
@@ -65,6 +69,22 @@ describe('EmailsInput tests', (): void => {
     await waitFor((): void => {
       expect(spyCreateEmailAddress).toHaveBeenCalledTimes(2);
       expect(spyResetEmailAddress).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  it('calls to save email addresses as a batch when multiple comma separated emails are entered, then resets the email', async (): Promise<void> => {
+    const { getByTestId } = render(
+      <EmailsInput {...defaultProps} />
+    );
+    const input = getByTestId('input');
+    const emails: string = 'one@test.com, two@test.com, three@test.com';
+
+    // then
+    fireEvent.change(input, { target: { value: emails } });
+
+    await waitFor((): void => {
+      expect(spyBatchCreateEmailAddresses).toHaveBeenCalled();
+      expect(spyResetEmailAddress).toHaveBeenCalled();
     });
   });
 

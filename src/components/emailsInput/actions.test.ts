@@ -10,6 +10,15 @@ describe('actions tests', (): void => {
     spyDispatch.mockClear();
   });
 
+  it('should create a batch of email addresses', (): void => {
+    // given
+    testActions.batchCreateEmailAddresses();
+
+    expect(spyDispatch).toHaveBeenCalledWith({
+      type: ActionTypes.BATCH_CREATE_EMAIL_ADDRESS,
+    });
+  });
+
   it('should create an email address', (): void => {
     // given
     testActions.createEmailAddress();
@@ -25,6 +34,7 @@ describe('actions tests', (): void => {
     const emailAddress: EmailAddress = {
       id: '123',
       email: 'test@test.nl',
+      isValid: true,
     };
 
     // then

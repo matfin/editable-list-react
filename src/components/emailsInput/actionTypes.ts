@@ -1,10 +1,15 @@
-import { EmailAddress } from 'models';
+import { Action, EmailAddress } from 'models';
 
 enum ActionTypes {
+  BATCH_CREATE_EMAIL_ADDRESS = '@emailsInput/BATCH_CREATE_EMAIL_ADDRESS',
   CREATE_EMAIL_ADDRESS = '@emailsInput/CREATE_EMAIL_ADDRESS',
   DELETE_EMAIL_ADDRESS = '@emailsInput/DELETE_EMAIL_ADDRESS',
   RESET_EMAIL_ADDRESS = '@emailsInput/RESET_EMAIL_ADDRESS',
   UPDATE_EMAIL_ADDRESS = '@emailsInput/UPDATE_EMAIL_ADDRESS',
+}
+
+export interface BatchCreateEmailAddresses {
+  type: ActionTypes.BATCH_CREATE_EMAIL_ADDRESS;
 }
 
 export interface CreateEmailAddress {
