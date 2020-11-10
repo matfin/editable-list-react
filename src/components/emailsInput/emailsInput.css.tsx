@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import InputBocComponent from 'components/inputbox';
 
 export const Container = styled.ul`
   display: block;
@@ -7,7 +8,11 @@ export const Container = styled.ul`
   border-radius: 0.25rem;
 `;
 
-export const EmailItem = styled.li`
+export const BoxItem = styled.li`
   display: inline-block;
   padding: 0.25rem;
+`;
+
+export const InputBox = styled(InputBocComponent)`
+  width: 8rem;
 `;

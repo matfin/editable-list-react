@@ -18,9 +18,11 @@ export const Text = styled.span`
 
 export const DeleteButton = styled.button`
   flex: 0 0 0.75rem;
+  height: 1.5rem;
 `;
 
 export const DeleteIcon = styled(RemoveIcon)`
   width: 0.5rem;
   height: 0.5rem;
+  margin-left: 0.5rem;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { EmailAddress } from 'models';
-import { Container, EmailItem } from './emailsInput.css';
+import { BoxItem, Container, InputBox } from './emailsInput.css';
 import EmailBlock from 'components/emailBlock';
 
 const data: EmailAddress[] = [
@@ -26,19 +26,32 @@ const data: EmailAddress[] = [
   },
 ];
 
-const EmailsInput = (): JSX.Element => (
-  <Container>
-    {data.map(
-      (item: EmailAddress): JSX.Element => (
-        <EmailItem key={item.id}>
-          <EmailBlock
-            emailAddress={item}
-            onClickDelete={console.log}
-          />
-        </EmailItem>
-      )
-    )}
-  </Container>
-);
+const EmailsInput = (): JSX.Element => {
+  const noop = (): void => {};
+
+  return (
+    <Container>
+      {data.map(
+        (item: EmailAddress): JSX.Element => (
+          <BoxItem key={item.id}>
+            <EmailBlock
+              emailAddress={item}
+              onClickDelete={noop}
+            />
+          </BoxItem>
+        )
+      )}
+      <BoxItem>
+        <InputBox
+          onInputBlur={noop}
+          onInputChange={noop}
+          onInputFocus={noop}
+          placeholder="add more people..."
+          shouldFocus
+        />
+      </BoxItem>
+    </Container>
+  );
+};
 
 export default EmailsInput;
