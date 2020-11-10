@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { Action, EmailAddress, EmailsInputState } from 'models';
+import { isValidEmail } from 'utils';
 import ActionTypes from './actionTypes';
 
 export const defaultState: EmailsInputState = {
@@ -17,9 +18,10 @@ const reducer = (
     case ActionTypes.CREATE_EMAIL_ADDRESS: {
       const { email } = state;
       const id = uuid();
-      const newEmailAddress = {
+      const newEmailAddress: EmailAddress = {
         email,
         id,
+        isValid: isValidEmail(email),
       };
 
       return {

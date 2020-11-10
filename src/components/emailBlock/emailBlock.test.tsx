@@ -1,13 +1,15 @@
 import React from 'react';
+import 'jest-styled-components';
 import { render, fireEvent } from '@testing-library/react';
-import { EmailAddress } from 'models';
 import EmailBlock, { Props } from '.';
+import { EmailAddress } from 'models';
 
 describe('EmailBlock tests', (): void => {
   const defaultProps: Props = {
     emailAddress: {
       email: 'test@test.nl',
-      id: '123'
+      id: '123',
+      isValid: true,
     },
     onClickDelete: jest.fn(),
   };
@@ -30,7 +32,26 @@ describe('EmailBlock tests', (): void => {
 
     expect(spyOnClickDelete).toHaveBeenCalledWith({
       email: 'test@test.nl',
-      id: '123'
+      id: '123',
+      isValid: true,
     });
+  });
+
+  it('styles email blocks with invalid email addresses', (): void => {
+    // given
+    const invalidEmailAddress: EmailAddress = {
+      email: 'invalid.email',
+      id: '123',
+      isValid: false,
+    };
+    const { getByTestId, getByText } = render(<EmailBlock {...defaultProps} emailAddress={invalidEmailAddress} />);
+    const component = getByTestId('email-block');
+    const text = getByText('invalid.email');
+
+    // then
+    expect(component).not.toHaveStyleRule('padding');
+    expect(component).not.toHaveStyleRule('background');
+    expect(component).not.toHaveStyleRule('border-radius');
+    expect(text).toHaveStyleRule('border-bottom', '1px dashed #d92929');
   });
 });
