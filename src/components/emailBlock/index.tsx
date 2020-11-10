@@ -10,10 +10,11 @@ export interface Props {
 
 const EmailBlock = ({className, emailAddress, onClickDelete}: Props): JSX.Element => {
   const onButtonClick = (): void => onClickDelete(emailAddress);
+  const { isValid } = emailAddress;
 
   return (
-    <Container className={className}>
-      <Text>
+    <Container data-testid="email-block" className={className} isValidEmail={isValid}>
+      <Text isValidEmail={isValid}>
         {emailAddress.email}
       </Text>
       <DeleteButton data-testid="delete" onClick={onButtonClick}>

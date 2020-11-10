@@ -5,6 +5,7 @@
       "components/*": ["src/components/*"],
       "hooks": ["src/hooks"],
       "models": ["src/models"],
+      "utils": ["src/utils"],
     },
     "target": "esnext",
     "module": "commonjs",

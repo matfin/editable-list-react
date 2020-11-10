@@ -12,7 +12,8 @@ module.exports = (env, { mode }) => ({
     alias: {
       'components': path.resolve(__dirname, 'src/components/'),
       'hooks': path.resolve(__dirname, 'src/hooks/'),
-      'models': path.resolve(__dirname, 'src/models/')
+      'models': path.resolve(__dirname, 'src/models/'),
+      'utils': path.resolve(__dirname, 'src/utils/')
     },
     extensions: ['.ts', '.tsx', '.js']
   },

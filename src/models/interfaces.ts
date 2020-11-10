@@ -1,4 +1,5 @@
 export interface EmailAddress {
-  id: string;
   email: string;
+  id: string;
+  isValid: boolean;
 }

@@ -17,6 +17,7 @@ module.exports = {
     '^components/(.*)$': '<rootDir>/src/components/$1',
     '^hooks/(.*)$': '<rootDir>/src/hooks/$1',
     '^models$': '<rootDir>/src/models',
+    '^utils$': '<rootDir>/src/utils',
   },
   coveragePathIgnorePatterns: [
     'node_modules',

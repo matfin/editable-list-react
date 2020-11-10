@@ -4,6 +4,7 @@ import reducer, { defaultState } from './reducer';
 
 describe('reducer', (): void => {
   const dummyEmailAddress: EmailAddress = {
+    isValid: true,
     id: '123',
     email: 'test@test.nl',
   };
@@ -21,7 +22,7 @@ describe('reducer', (): void => {
 
     const check: EmailsInputState = {
       email: 'test@test.ie',
-      emailAddresses: [{ id: expect.any(String), email: 'test@test.ie' }],
+      emailAddresses: [{ id: expect.any(String), email: 'test@test.ie', isValid: true }],
     };
 
     expect(state).toEqual(check);
