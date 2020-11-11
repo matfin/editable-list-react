@@ -3,3 +3,7 @@ export interface EmailAddress {
   id: string;
   isValid: boolean;
 }
+
+export interface CustomEventProps {
+  detail: any
+}

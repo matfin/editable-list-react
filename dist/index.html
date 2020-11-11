@@ -14,10 +14,10 @@
           <div id="emails-input"></div>
         </div>
         <div id="actions">
-          <button class="action-button">
+          <button id="add-email" class="action-button">
             Add Email
           </button>
-          <button class="action-button">
+          <button id="get-count" class="action-button">
             Get emails count
           </button>
         </div>
@@ -25,9 +25,36 @@
     </div>
     <script src="emails-input.js"></script>
     <script type="text/javascript">
-      var node = document.querySelector('#emails-input');
+      var root = document.querySelector('#emails-input');
+      var emailAddresses = [
+        'me@mattfinucane.com',
+        'test@one.nl',
+        'another@two.de',
+        'three@four.ru',
+        'five@six-seven.yu',
+        'someone@somewhere.com',
+      ];
+      var randomNumberInRange = function (min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      };
 
-      TestEmailsInput(node);
+      // initialise the component
+      emailBoard.init(root);
+
+      // add a random email
+      document.querySelector('#add-email').addEventListener('click', function () {
+        var index = randomNumberInRange(0, emailAddresses.length);
+
+        emailBoard.addRandomEmail(emailAddresses[index]);
+      });
+
+      // get email count
+      document.querySelector('#get-count').addEventListener('click', function () {
+        var emailBlockNodes = document.querySelectorAll('#emails-input div[data-testid="email-block"]');
+
+        alert(emailBlockNodes.length);
+      });
+
     </script>
   </body>
 </html>
