@@ -4,6 +4,9 @@ export interface EmailAddress {
   isValid: boolean;
 }
 
-export interface CustomEventProps {
-  detail: any
+export interface EmailAddedEventProps {
+  detail: {
+    email: string;
+    listId: string;
+  }
 }

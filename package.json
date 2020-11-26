@@ -10,7 +10,7 @@
     "checks": "yarn coverage && yarn lint",
     "coverage": "jest --collect-coverage",
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack serve --config webpack.dev.js",
+    "dev": "webpack --config webpack.dev.js",
     "lint": "eslint ./src/**/*.tsx",
     "test": "jest"
   },
@@ -51,7 +51,6 @@
     "webpack": "^5.4.0",
     "webpack-bundle-analyzer": "^4.1.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.3.0"
   },
   "pre-commit": [
