@@ -1,5 +1,4 @@
 node_modules/
 coverage/
-dist/emails-input.js
 dist/emails-input.js.LICENSE.txt
 .DS_Store

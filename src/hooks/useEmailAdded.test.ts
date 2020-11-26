@@ -6,7 +6,7 @@ describe('useEmailAdded hook', (): void => {
   it('should run the callback when the custom event is fired', (): void => {
     // given
     const spyCb = jest.fn();
-    const event = { detail: 'test@test.nl' };
+    const event = { detail: 'test@test.nl', listId: '123' };
 
     // then
     renderHook((): void => useEmailAdded(spyCb));

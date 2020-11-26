@@ -7,10 +7,6 @@ module.exports = merge(common, {
   mode: 'development',
   watch: true,
   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    port: 3000
-  },
   plugins: [
     new BundleAnalyzerPlugin()
   ],

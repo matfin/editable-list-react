@@ -1,4 +1,4 @@
-import { CustomEventProps } from 'models';
+import { EmailAddedEventProps } from 'models';
 
 export const isValidEmail = (email?: string): boolean => {
   const re: RegExp = RegExp(/(.+)@(.+){2,}\.(.+){2,}/);
@@ -6,7 +6,7 @@ export const isValidEmail = (email?: string): boolean => {
   return re.test(email ?? '');
 };
 
-export const publishEvent = (name: string, payload: CustomEventProps): void => {
+export const publishEvent = (name: string, payload: EmailAddedEventProps): void => {
   const event: CustomEvent = new CustomEvent(name, payload);
 
   window.dispatchEvent(event);

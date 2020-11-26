@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { EmailAddedEventProps } from 'models';
 
 export const useEmailAdded = (cb: (e: any) => void): void => {
   useEffect((): (() => void) => {
