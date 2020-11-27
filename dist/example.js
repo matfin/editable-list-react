@@ -41,4 +41,14 @@ window.addEventListener('load', () => {
 
     alert(emailBlockNodes.length);
   });
+
+  window.elPollute = (listId, count = 100) => {
+    for(let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const index = randomNumberInRange(0, emailAddresses.length);
+
+        emailBoard.addRandomEmail(emailAddresses[index], listId);
+      }, 10);
+    }
+  };
 });

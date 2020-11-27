@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { EmailAddress, ShortcutKeys } from 'models';
 import { useKeyDown } from 'hooks';
 import { BoxItem, Container, InputBox } from './emailsInput.css';
-import EmailBlock from 'components/emailBlock';
+import EmailBlock, { Props as EmailBlockProps } from 'components/emailBlock';
 
 export interface Props {
   email: string;
@@ -13,6 +13,10 @@ export interface Props {
   resetEmailAddress: () => void;
   updateEmailAddress: (email: string) => void;
 }
+
+const MemoEmailBlock = React.memo((props: EmailBlockProps): JSX.Element => (
+  <EmailBlock {...props} />
+));
 
 export const EmailsInput = ({
   email,
@@ -43,6 +47,8 @@ export const EmailsInput = ({
     }
   };
 
+  const memoizedDeleteEmailAddress = useCallback(deleteEmailAddress, []);
+
   useKeyDown((e: KeyboardEvent): void => {
     const { key } = e;
 
@@ -61,9 +67,9 @@ export const EmailsInput = ({
       {emailAddresses.map(
         (item: EmailAddress): JSX.Element => (
           <BoxItem key={item.id}>
-            <EmailBlock
+            <MemoEmailBlock
               emailAddress={item}
-              onClickDelete={deleteEmailAddress}
+              onClickDelete={memoizedDeleteEmailAddress}
             />
           </BoxItem>
         )
