@@ -5,11 +5,11 @@ import { Container, DeleteIcon, DeleteButton, Text } from './emailBlock.css';
 export interface Props {
   className?: string;
   emailAddress: EmailAddress;
-  onClickDelete: (emailAddress: EmailAddress) => void;
+  onClickDelete?: (emailAddress: EmailAddress) => void;
 };
 
 const EmailBlock = ({className, emailAddress, onClickDelete}: Props): JSX.Element => {
-  const onButtonClick = (): void => onClickDelete(emailAddress);
+  const onButtonClick = (): void => onClickDelete && onClickDelete(emailAddress);
   const { isValid } = emailAddress;
 
   return (
