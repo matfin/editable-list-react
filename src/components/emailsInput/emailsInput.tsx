@@ -6,7 +6,8 @@ import EmailBlock, { Props as EmailBlockProps } from 'components/emailBlock';
 
 export interface Props {
   email: string;
-  emailAddresses: EmailAddress[],
+  emailAddresses: EmailAddress[];
+  optimised?: boolean;
   batchCreateEmailAddresses: () => void;
   createEmailAddress: () => void;
   deleteEmailAddress: (emailAddress: EmailAddress) => void;
@@ -14,13 +15,14 @@ export interface Props {
   updateEmailAddress: (email: string) => void;
 }
 
-const MemoEmailBlock = React.memo((props: EmailBlockProps): JSX.Element => (
-  <EmailBlock {...props} />
-));
+const MemoEmailBlock = React.memo(
+  (props: EmailBlockProps): JSX.Element => <EmailBlock {...props} />
+);
 
 export const EmailsInput = ({
   email,
   emailAddresses,
+  optimised = true,
   batchCreateEmailAddresses,
   createEmailAddress,
   deleteEmailAddress,
@@ -34,7 +36,7 @@ export const EmailsInput = ({
 
     updateEmailAddress(value);
 
-    if(splitValues.length > 1) {
+    if (splitValues.length > 1) {
       batchCreateEmailAddresses();
       resetEmailAddress();
     }
@@ -52,7 +54,7 @@ export const EmailsInput = ({
   useKeyDown((e: KeyboardEvent): void => {
     const { key } = e;
 
-    switch(key) {
+    switch (key) {
       case ShortcutKeys.COMMA:
       case ShortcutKeys.ENTER: {
         e.preventDefault();
@@ -67,10 +69,17 @@ export const EmailsInput = ({
       {emailAddresses.map(
         (item: EmailAddress): JSX.Element => (
           <BoxItem key={item.id}>
-            <MemoEmailBlock
-              emailAddress={item}
-              onClickDelete={memoizedDeleteEmailAddress}
-            />
+            {optimised ? (
+              <MemoEmailBlock
+                emailAddress={item}
+                onClickDelete={memoizedDeleteEmailAddress}
+              />
+            ) : (
+              <EmailBlock
+                emailAddress={item}
+                onClickDelete={memoizedDeleteEmailAddress}
+              />
+            )}
           </BoxItem>
         )
       )}

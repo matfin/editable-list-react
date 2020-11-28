@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { publishEvent } from 'utils';
 import EmailsInput from 'components/emailsInput';
 
-const init = (attachTo: HTMLElement, listId: string): void => {
-  const cmp: JSX.Element = <EmailsInput listId={listId} />;
+interface Bridge {
+  addEmailAddress?(email: string): void;
+  getEmailCount?(): number;
+}
 
-  ReactDOM.render(cmp, attachTo);
-};
+const init = (attachTo: HTMLElement, optimised: boolean): Promise<Bridge> => new Promise((resolve): void => {
+  const bridge: Bridge = {};
+  const cmp: JSX.Element = <EmailsInput bridge={bridge} optimised={optimised} />
 
-const addRandomEmail = (email: string, listId: string): void => {
-  publishEvent('emails:add', { detail: { email, listId } });
-};
+  ReactDOM.render(cmp, attachTo, (): void => resolve(bridge));
+});
 
 window.emailBoard = {
-  init,
-  addRandomEmail,
-}
+  init
+};
