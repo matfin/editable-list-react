@@ -1,33 +1,35 @@
-import React, { useReducer } from 'react';
-import { EmailAddedEventProps } from 'models';
+import React, { useEffect, useReducer } from 'react';
 import emailsInputActions from './actions';
 import emailsInputReducer, { defaultState } from './reducer';
-import { useEmailAdded } from 'hooks';
 import { EmailsInput } from './emailsInput';
 
 interface Props {
-  listId: string;
+  bridge: {
+    addEmailAddress?(email: string): void;
+    getEmailCount?(): number;
+  };
+  optimised?: boolean;
 };
 
-const ContainerComponent = ({ listId }: Props): JSX.Element => {
+const ContainerComponent = ({ bridge, optimised }: Props): JSX.Element => {
   const [state, dispatch] = useReducer(emailsInputReducer, defaultState);
   const actions = emailsInputActions(dispatch);
   const { emailAddresses, email } = state;
 
-  useEmailAdded(({ detail }: EmailAddedEventProps): void => {
-    const { email, listId: id } = detail;
-
-    if (id === listId) {
+  useEffect((): void => {
+    bridge.addEmailAddress = (email: string) => {
       actions.updateEmailAdress(email);
       actions.createEmailAddress();
       actions.resetEmailAddress();
-    }
-  });
+    };
+    bridge.getEmailCount = (): number => emailAddresses?.length ?? 0;
+  }, [emailAddresses]);
 
   return (
     <EmailsInput
       email={email}
       emailAddresses={emailAddresses}
+      optimised={optimised}
       batchCreateEmailAddresses={actions.batchCreateEmailAddresses}
       createEmailAddress={actions.createEmailAddress}
       deleteEmailAddress={actions.deleteEmailAddress}

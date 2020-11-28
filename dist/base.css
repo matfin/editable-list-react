@@ -47,6 +47,10 @@ h1 strong {
   font-weight: 700;
 }
 
+p {
+  margin-bottom: 1.5rem;
+}
+
 .container {
   width: 70%;
   min-width: 25rem;

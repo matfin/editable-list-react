@@ -33,9 +33,18 @@ describe('EmailsInput tests', (): void => {
     spyUpdateEmailAddress.mockClear();
   });
 
-  it('renders the component with email addresses', (): void => {
+  it('renders the optimised component with email addresses', (): void => {
     // given
     const { getByText } = render(<EmailsInput {...defaultProps} emailAddresses={emailAddresses}  />);
+
+    // then
+    expect(getByText('matt@test.one')).toBeTruthy();
+    expect(getByText('matt@test.two')).toBeTruthy();
+  });
+
+  it('renders the unoptimised component with email addresses', (): void => {
+    // given
+    const { getByText } = render(<EmailsInput {...defaultProps} emailAddresses={emailAddresses} optimised={false} />);
 
     // then
     expect(getByText('matt@test.one')).toBeTruthy();

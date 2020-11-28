@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React Editable List</title>
+    <title>React Performance Demo</title>
     <link rel="stylesheet" type="text/css" href="dist/base.css" />
   </head>
   <body>
-    <!-- First -->
-    <div class="container" id="first">
+    <!-- Optimised -->
+    <div class="container" id="optimised">
       <div class="editor">
-        <h1>Put <strong>valid emails</strong> here</h1>
+        <h1>This editable list is <strong>optimised</strong> and is faster</h1>
+        <p>Adding a large number of emails to this list should not adversely affect performance here. Try typing into the input.</p>
         <div class="emails-input"></div>
       </div>
       <div class="actions">
         <button class="action-button add-email">
-          Add Email
+          Add 400 more emails
         </button>
         <button class="action-button get-count">
           Get emails count
@@ -23,15 +24,16 @@
       </div>
     </div>
 
-    <!-- Second -->
-    <div class="container" id="second">
+    <!-- Control -->
+    <div class="container" id="control">
       <div class="editor">
-        <h1>Put <strong>valid emails</strong> here</h1>
+        <h1>This editable list is <strong>not optimised</strong> and is slower</h1>
+        <p>Adding a large number of emails to this list will gradually degrade performance, and typing into the input will become increasingly sluggish.</p>
         <div class="emails-input"></div>
       </div>
       <div class="actions">
         <button class="action-button add-email">
-          Add Email
+          Add 400 more emails
         </button>
         <button class="action-button get-count">
           Get emails count
