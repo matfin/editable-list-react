@@ -14,6 +14,7 @@ window.addEventListener('load', async () => {
   const randomNumberInRange = function (min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   };
+  const numberToAdd = 200;
 
   // initialise the optimised component
   const optimisedEl = document.querySelector('#optimised .emails-input');
@@ -32,12 +33,19 @@ window.addEventListener('load', async () => {
 
   // add a large number of emails to the optimised list
   optimisedAddButton.addEventListener('click', () => {
-    for (let i = 0; i < 200; i++) {
+    const start = performance.now();
+
+    for (let i = 1; i <= numberToAdd; i++) {
       setTimeout(() => {
         const index = randomNumberInRange(0, randomEmails.length);
 
         optimised.addEmailAddress(randomEmails[index]);
         optimisedIndicator.innerHTML = `Adding: ${i + 1} items`;
+
+        if (i === numberToAdd) {
+          const durationMs = Math.round(performance.now() - start);
+          optimisedIndicator.innerHTML = `Completed: ${durationMs}ms`;
+        }
       });
     }
   });
@@ -48,12 +56,19 @@ window.addEventListener('load', async () => {
 
   // add a large number of emails to the control list
   controlAddButton.addEventListener('click', () => {
-    for (let i = 0; i < 200; i++) {
+    const start = performance.now();
+
+    for (let i = 1; i <= numberToAdd; i++) {
       setTimeout(() => {
         const index = randomNumberInRange(0, randomEmails.length);
 
         control.addEmailAddress(randomEmails[index]);
         controlIndicator.innerHTML = `Adding: ${i + 1} items`;
+
+        if (i === numberToAdd) {
+          const durationMs = Math.round(performance.now() - start);
+          controlIndicator.innerHTML = `Completed: ${durationMs}ms`;
+        }
       });
     }
   });
